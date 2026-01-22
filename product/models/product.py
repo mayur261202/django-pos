@@ -1,11 +1,11 @@
 from django.db import models
 
-from possystem.product.models.category import Category
+from .category import Category
 
 class Product(models.Model):
     FOOD_TYPES = [('veg', 'Veg'), ('non-veg', 'Non-Veg')]
     
-    category = models.ForeignKey(Category, related_name='products')
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='products/', null=True, blank=True)

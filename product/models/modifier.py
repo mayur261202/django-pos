@@ -1,6 +1,6 @@
 from django.db import models
 
-from possystem.product.models.product import Product
+from .product import Product
 
 class ModifierGroup(models.Model):
     name=models.CharField(max_length=100)
@@ -11,7 +11,7 @@ class ModifierGroup(models.Model):
         return self.name
     
 class Modifier(models.Model):
-    group = models.ForeignKey(ModifierGroup, related_name='options')
+    group = models.ForeignKey(ModifierGroup, related_name='options', on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
     
